@@ -1,0 +1,28 @@
+kumuluzee:
+  name: basketball-matchmaking
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8085
+    http:
+      port: 8085
+  datasources:
+    - jndi-name: jdbc/matchmakingDS
+      connection-url: jdbc:postgresql://pg-events.clvqrwayazxs.eu-central-1.rds.amazonaws.com/matchmaking
+      username: postgres
+      password: postgres12
+  health:
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/matchmakingDS
+  metrics:
+    web-instrumentation:
+      - name: matchmaking-endpoint
+        url-pattern: /v1/matchmaking/*
+  rest-client:
+    registrations:
+      - class: api
+        url: http://localhost:8085/v1
+        read-timeout: 5000
