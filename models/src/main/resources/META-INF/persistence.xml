@@ -3,7 +3,8 @@
     <persistence-unit name="microservice-matchmaking-jpa" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>jdbc/matchmakingDS</non-jta-data-source>
 
-<!--        <class>si.fri.rsoteam.models.entities.ENTITIY</class>-->
+        <class>si.fri.rsoteam.models.entities.MatchmakingEntity</class>
+        <class>si.fri.rsoteam.models.entities.ParticipantEntity</class>
         <class>si.fri.rsoteam.models.converters.InstantAtributeConverter</class>
 
         <properties>

@@ -11,6 +11,8 @@ public class ParticipantEntity {
     @Column(columnDefinition = "serial")
     private Integer id;
 
+    private Integer userId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private MatchmakingEntity matchmaking;
 
@@ -29,4 +31,15 @@ public class ParticipantEntity {
     public void setMatchmaking(MatchmakingEntity matchmaking) {
         this.matchmaking = matchmaking;
     }
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+
 }

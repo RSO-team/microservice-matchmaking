@@ -1,6 +1,17 @@
 package si.fri.rsoteam.api.v1.resources;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import si.fri.rsoteam.lib.dtos.MatchmakingDto;
+import si.fri.rsoteam.services.beans.MatchmakingBean;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,39 +34,79 @@ public class MatchmakingResource {
 
     private Logger log = Logger.getLogger(MatchmakingResource.class.getName());
 
-//    @Inject
-//    private EventsBean eventsBean;
+    @Inject
+    private MatchmakingBean matchmakingsBean;
 
     @Context
     protected UriInfo uriInfo;
 
     @GET
-    public Response getObjects() {
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+    @Operation(summary = "Get list of matchmakings", description = "Returns list of matchmaking enteries.")
+    @APIResponses({
+            @APIResponse(
+                    description = "Returned successfully list matchmaking",
+                    responseCode = "200",
+                    content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY)),
+                    headers = {@Header(name = "X-Total-Count", description = "Number of objects in list")}
+            )
+    })
+    public Response getMatchmakings() {
+        return Response.ok(matchmakingsBean.getAllMatches()).build();
     }
 
     @GET
     @Path("/{objectId}")
-    public Response getObjectById(@PathParam("objectId") Integer id) {
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+    @Operation(summary = "Get matchmaking by id.", description = "Returns specific matchmaking.")
+    @APIResponses({
+            @APIResponse(
+                    description = "Returned successfully specific matchmaking entry",
+                    responseCode = "200",
+                    content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
+            )
+    })
+    public Response getMatchmakingById(@PathParam("objectId") Integer id) {
+        return Response.ok(matchmakingsBean.getMatchmaking(id)).build();
     }
 
     @POST
-    public Response createObject(Object object) {
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
-
+    @Operation(summary = "Create new matchmaking entry ", description = "Create new matchmaking entry")
+    @APIResponses({
+            @APIResponse(
+                    description = "Created successfully matchmaking entry",
+                    responseCode = "201",
+                    content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
+            )
+    })
+    public Response createMatchmaking(MatchmakingDto matchmakingDto) {
+        return Response.status(201).entity(matchmakingsBean.createMatchmaking(matchmakingDto)).build();
     }
 
     @PUT
     @Path("{objectId}")
-    public Response putObjectById(@PathParam("objectId") Integer id,
-                                     Object object) {
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+    @Operation(summary = "Update matchmaking.", description = "Updates specific matchmaking by id.")
+    @APIResponses({
+            @APIResponse(
+                    description = "Updated successfully matchmaking entry",
+                    responseCode = "201",
+                    content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
+            )
+    })
+    public Response updateMatchmaking(@PathParam("objectId") Integer id, MatchmakingDto eventDto) {
+        return Response.status(201).entity(matchmakingsBean.updateMatchmaking(eventDto, id)).build();
     }
 
     @DELETE
     @Path("{objectId}")
-    public Response deleteObject(@PathParam("objectId") Integer id) {
-        return Response.status(Response.Status.NOT_IMPLEMENTED).build();
+    @Operation(summary = "Delete matchmaking.", description = "Delete specific matchmaking by id.")
+    @APIResponses({
+            @APIResponse(
+                    description = "Deleted successfully matchmaking entry",
+                    responseCode = "204",
+                    content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
+            )
+    })
+    public Response deleteEvent(@PathParam("objectId") Integer id) {
+        matchmakingsBean.deleteMatchmaking(id);
+        return Response.status(204).build();
     }
 }

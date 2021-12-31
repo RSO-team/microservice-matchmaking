@@ -14,7 +14,7 @@ public class ParticipantMapper {
 
     public static ParticipantEntity dtoToEntity(ParticipantDto participantDto) {
         ParticipantEntity participantEntity = new ParticipantEntity();
-        participantEntity.setId(participantDto.userId);
+        participantEntity.setUserId(participantDto.userId);
         return  participantEntity;
     }
 }

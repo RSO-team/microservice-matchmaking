@@ -1,1 +1,19 @@
-INSERT INTO image_metadata (title, description, width, height, created, uri) VALUES ('Our fist image', 'This is the first image that we created for the RSO course.', 1280, 1325, TIMESTAMP '2006-01-01 15:36:38', 'https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/tess_first_light-tb.jpg');
+insert into matchmaking (name,date) VALUES ('first match','2021-12-08 18:44:32.000000');
+insert into matchmaking (name,date) VALUES ('second match','2021-12-08 18:44:32.000000');
+insert into matchmaking (name,date) VALUES ('third match','2021-12-08 18:44:32.000000');
+
+insert into participant (userid,matchmaking_id) VALUES (1,1);
+insert into participant (userid,matchmaking_id) VALUES (2,1);
+insert into participant (userid,matchmaking_id) VALUES (3,1);
+insert into participant (userid,matchmaking_id) VALUES (4,1);
+insert into participant (userid,matchmaking_id) VALUES (5,1);
+insert into participant (userid,matchmaking_id) VALUES (6,1);
+
+insert into participant (userid,matchmaking_id) VALUES (1,2);
+insert into participant (userid,matchmaking_id) VALUES (2,2);
+insert into participant (userid,matchmaking_id) VALUES (3,2);
+insert into participant (userid,matchmaking_id) VALUES (4,2);
+
+insert into participant (userid,matchmaking_id) VALUES (3,3);
+insert into participant (userid,matchmaking_id) VALUES (4,3);
+

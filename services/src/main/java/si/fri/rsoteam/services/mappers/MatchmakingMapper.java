@@ -18,9 +18,9 @@ public class MatchmakingMapper {
     public static MatchmakingEntity dtoToEntity(MatchmakingDto matchmakingDto) {
         MatchmakingEntity matchmakingEntity = new MatchmakingEntity();
         matchmakingEntity.setName(matchmakingDto.name);
-        matchmakingEntity.setId(matchmakingDto.id);
         matchmakingEntity.setDate(matchmakingDto.date);
         matchmakingEntity.setMatch(matchmakingDto.match.stream().map(ParticipantMapper::dtoToEntity).collect(Collectors.toList()));
+        matchmakingEntity.getMatch().forEach(participantEntity -> participantEntity.setMatchmaking(matchmakingEntity));
         return  matchmakingEntity;
     }
 }

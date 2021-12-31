@@ -26,3 +26,10 @@ kumuluzee:
       - class: api
         url: http://localhost:8085/v1
         read-timeout: 5000
+
+rest-config:
+  maintenance-mode: false
+  api-token: htn12kss3
+  string-property: Monday
+  boolean-property: true
+  integer-property: 23

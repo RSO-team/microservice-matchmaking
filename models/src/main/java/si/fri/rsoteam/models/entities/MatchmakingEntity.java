@@ -15,7 +15,7 @@ public class MatchmakingEntity implements java.io.Serializable {
     private Integer id;
 
     @OneToMany(mappedBy = "matchmaking",cascade={CascadeType.PERSIST,CascadeType.REMOVE}, orphanRemoval=true)
-    private List<ParticipantEntity> match = new ArrayList<ParticipantEntity>();
+    private List<ParticipantEntity> match = new ArrayList<>();
 
     private String name;
 
