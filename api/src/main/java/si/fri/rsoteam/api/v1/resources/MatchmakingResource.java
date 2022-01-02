@@ -1,5 +1,9 @@
 package si.fri.rsoteam.api.v1.resources;
 
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.Logger;
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
@@ -24,7 +28,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.logging.Logger;
 
 @ApplicationScoped
 @Path("/matchmaking")
@@ -32,7 +35,7 @@ import java.util.logging.Logger;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MatchmakingResource {
 
-    private Logger log = Logger.getLogger(MatchmakingResource.class.getName());
+    private Logger log = LogManager.getLogger(MatchmakingResource.class.getName());
 
     @Inject
     private MatchmakingBean matchmakingsBean;
@@ -50,6 +53,7 @@ public class MatchmakingResource {
                     headers = {@Header(name = "X-Total-Count", description = "Number of objects in list")}
             )
     })
+    @Log(LogParams.METRICS)
     public Response getMatchmakings() {
         return Response.ok(matchmakingsBean.getAllMatches()).build();
     }
@@ -64,6 +68,7 @@ public class MatchmakingResource {
                     content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
             )
     })
+    @Log(LogParams.METRICS)
     public Response getMatchmakingById(@PathParam("objectId") Integer id) {
         return Response.ok(matchmakingsBean.getMatchmaking(id)).build();
     }
@@ -77,6 +82,7 @@ public class MatchmakingResource {
                     content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
             )
     })
+    @Log(LogParams.METRICS)
     public Response createMatchmaking(MatchmakingDto matchmakingDto) {
         return Response.status(201).entity(matchmakingsBean.createMatchmaking(matchmakingDto)).build();
     }
@@ -91,6 +97,7 @@ public class MatchmakingResource {
                     content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
             )
     })
+    @Log(LogParams.METRICS)
     public Response updateMatchmaking(@PathParam("objectId") Integer id, MatchmakingDto eventDto) {
         return Response.status(201).entity(matchmakingsBean.updateMatchmaking(eventDto, id)).build();
     }
@@ -105,6 +112,7 @@ public class MatchmakingResource {
                     content = @Content(schema = @Schema(implementation = MatchmakingDto.class, type = SchemaType.ARRAY))
             )
     })
+    @Log(LogParams.METRICS)
     public Response deleteEvent(@PathParam("objectId") Integer id) {
         matchmakingsBean.deleteMatchmaking(id);
         return Response.status(204).build();
