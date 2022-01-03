@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class ParticipantMapper {
     public static ParticipantDto entityToDto(ParticipantEntity et) {
         ParticipantDto participantDto = new ParticipantDto();
-        participantDto.userId = et.getId();
+        participantDto.userId = et.getUserId();
         return participantDto;
     }
 
