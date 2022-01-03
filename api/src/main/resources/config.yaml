@@ -25,6 +25,7 @@ kumuluzee:
   cors-filter:
     servlet:
       allow-origin: "*"
+      supported-methods: "GET,POST,HEAD,OPTIONS,PUT,DELETE"
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                           <Configuration name="comments">
@@ -50,6 +51,16 @@ kumuluzee:
       - class: api
         url: http://localhost:8085/v1
         read-timeout: 5000
+  discovery:
+    etcd:
+      hosts: http://localhost:2379
+    ttl: 30
+    ping-interval: 5
+  config:
+    start-retry-delay-ms: 500
+    max-retry-delay-ms: 900000
+    etcd:
+      hosts: http://localhost:2379
 
 rest-config:
   maintenance-mode: false
