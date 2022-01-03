@@ -25,6 +25,7 @@ kumuluzee:
   cors-filter:
     servlet:
       allow-origin: "*"
+      supported-methods: "GET,POST,HEAD,OPTIONS,PUT,DELETE"
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                           <Configuration name="comments">
