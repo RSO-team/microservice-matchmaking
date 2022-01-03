@@ -17,13 +17,13 @@ spec:
           name: basketball-matchmaking
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-              value: jdbc:postgresql://pg-events.clvqrwayazxs.eu-central-1.rds.amazonaws.com/matchmaking
+              value: jdbc:postgresql://ella.db.elephantsql.com/djdzbqlz
             - name: KUMULUZEE_DATASOURCES0_USERNAME
-              value: postgres
+              value: djdzbqlz
             - name: KUMULUZEE_DATASOURCES0_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pg-pass
+                  name: pg-pass-matchmaking
                   key: KUMULUZEE_DATASOURCES0_PASSWORD
           ports:
             - containerPort: 8085
