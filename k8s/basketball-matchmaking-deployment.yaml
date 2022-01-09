@@ -52,7 +52,7 @@ kind: Service
 metadata:
   name: basketball-matchmaking
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 8085
       protocol: TCP
