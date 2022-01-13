@@ -53,6 +53,7 @@ kumuluzee:
         url: http://localhost:8085/v1
         read-timeout: 5000
   discovery:
+    cluster: 1
     etcd:
       hosts: http://localhost:2379
     ttl: 30
